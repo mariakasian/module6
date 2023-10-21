@@ -5,12 +5,10 @@ import org.flywaydb.core.Flyway;
 import java.io.IOException;
 
 public class DatabaseMigrationService {
-    public static void migrateDb(Database db) throws IOException {
-        String connectionUrl = new Prefs().getString(Prefs.DB_URL);
-
+    public static void migrateDb(String conUrl) throws IOException {
         Flyway flyway = Flyway
                 .configure()
-                .dataSource(connectionUrl, null, null)
+                .dataSource(conUrl, null, null)
                 .load();
 
         flyway.migrate();

@@ -2,6 +2,8 @@ package com.maria;
 
 import java.io.IOException;
 
+
+import static com.maria.Database.conUrl;
 import static com.maria.DatabaseMigrationService.migrateDb;
 import static com.maria.DatabaseQueryService.*;
 
@@ -9,7 +11,7 @@ public class App {
     public static void main(String[] args) throws IOException {
         Database db = Database.getInstance();
 
-        migrateDb(db);
+        migrateDb(conUrl);
 
         findMaxSalaryWorker(db);
         findMaxProjectsClient(db);

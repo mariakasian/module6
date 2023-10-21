@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Database {
+    static String conUrl;
     private static Connection con;
     private static final Database INSTANCE = new Database();
 
     public static Database getInstance(){
         return INSTANCE;
     }
+    public static Connection getConnection() { return con; }
 
     private  Database() {
         try {
-            String conUrl = new Prefs().getString(Prefs.DB_URL);
+            conUrl = new Prefs().getString(Prefs.DB_URL);
             con = DriverManager.getConnection(conUrl);
         } catch (SQLException | IOException e) {
             System.out.printf("Exception reason: %s%n", e.getMessage());

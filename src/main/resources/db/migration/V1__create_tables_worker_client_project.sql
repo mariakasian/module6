@@ -32,13 +32,13 @@ CREATE TABLE IF NOT EXISTS project (
     client_id BIGINT,
     start_date DATE,
     finish_date DATE,
-    FOREIGN KEY(client_id) REFERENCES client(client_id)
+    FOREIGN KEY(client_id) REFERENCES client(client_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS project_worker (
     project_id BIGINT,
     worker_id BIGINT,
     PRIMARY KEY(project_id, worker_id),
-    FOREIGN KEY(project_id) REFERENCES project(project_id),
-    FOREIGN KEY(worker_id) REFERENCES worker(worker_id)
+    FOREIGN KEY(project_id) REFERENCES project(project_id) ON DELETE CASCADE,
+    FOREIGN KEY(worker_id) REFERENCES worker(worker_id) ON DELETE CASCADE
 );
