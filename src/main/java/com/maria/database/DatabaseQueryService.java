@@ -1,4 +1,4 @@
-package com.maria;
+package com.maria.database;
 
 import java.io.IOException;
 import java.nio.file.Files;

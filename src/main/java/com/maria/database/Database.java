@@ -1,10 +1,10 @@
-package com.maria;
+package com.maria.database;
 
 import java.io.IOException;
 import java.sql.*;
 
 public class Database {
-    static String conUrl;
+    public static String conUrl;
     private static Connection con;
     private static final Database INSTANCE = new Database();
 

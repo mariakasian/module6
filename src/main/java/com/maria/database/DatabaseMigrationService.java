@@ -1,4 +1,4 @@
-package com.maria;
+package com.maria.database;
 
 import org.flywaydb.core.Flyway;
 

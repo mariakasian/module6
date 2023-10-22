@@ -1,4 +1,4 @@
-package com.maria;
+package com.maria.database;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -1,4 +1,4 @@
-package com.maria;
+package com.maria.client_service;
 
 import java.util.Objects;
 

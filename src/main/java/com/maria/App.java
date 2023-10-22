@@ -1,11 +1,12 @@
 package com.maria;
 
+import com.maria.database.Database;
+
 import java.io.IOException;
 
-
-import static com.maria.Database.conUrl;
-import static com.maria.DatabaseMigrationService.migrateDb;
-import static com.maria.DatabaseQueryService.*;
+import static com.maria.database.Database.conUrl;
+import static com.maria.database.DatabaseMigrationService.migrateDb;
+import static com.maria.database.DatabaseQueryService.*;
 
 public class App {
     public static void main(String[] args) throws IOException {

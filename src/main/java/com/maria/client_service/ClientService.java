@@ -1,4 +1,4 @@
-package com.maria;
+package com.maria.client_service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,8 +46,10 @@ public class ClientService {
         );
     }
 
-    public long create(String cname) throws SQLException {
-        createSt.setString(1, cname);
+    public long create(String name) throws SQLException, InvalidNameException {
+        nameValidation(name);
+
+        createSt.setString(1, name);
         createSt.executeUpdate();
 
         long id;
@@ -56,11 +58,12 @@ public class ClientService {
             rs.next();
             id = rs.getLong("maxId");
         }
-
         return id;
-      }
+    }
 
-    public String getById(long id) throws SQLException {
+    public String getById(long id) throws SQLException, InvalidIdException {
+        idValidation(id);
+
         getByIdSt.setLong(1, id);
 
         try(ResultSet rs = getByIdSt.executeQuery()) {
@@ -72,13 +75,18 @@ public class ClientService {
         }
     }
 
-    public void setName(long id, String name) throws SQLException {
+    public void setName(long id, String name) throws SQLException, InvalidIdException, InvalidNameException {
+        idValidation(id);
+        nameValidation(name);
+
         updateSt.setString(1, name);
         updateSt.setLong(2, id);
         updateSt.executeUpdate();
     }
 
-    public void deleteById(long id) throws SQLException {
+    public void deleteById(long id) throws SQLException, InvalidIdException {
+        idValidation(id);
+
         deleteByIdSt.setLong(1, id);
         deleteByIdSt.executeUpdate();
     }
@@ -98,5 +106,29 @@ public class ClientService {
 
     public void clear() throws SQLException {
         clearSt.executeUpdate();
+    }
+
+    public static class InvalidNameException extends Exception {
+        public InvalidNameException(String message) {
+            super(message);
+        }
+    }
+
+    public static class InvalidIdException extends Exception {
+        public InvalidIdException(String message) {
+            super(message);
+        }
+    }
+
+    public void nameValidation(String name) throws InvalidNameException {
+        if (name.length() < 2 || name.length() > 1000) {
+            throw new InvalidNameException("Довжина імені повинна бути від 2 до 1000 символів.");
+        }
+    }
+
+    public void idValidation(long id) throws InvalidIdException {
+        if (id <= 0) {
+            throw new InvalidIdException("Id має бути більше 0.");
+        }
     }
 }
